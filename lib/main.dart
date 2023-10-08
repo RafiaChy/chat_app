@@ -38,7 +38,7 @@ class _RootAppState extends State<RootApp> {
 
       ),
       debugShowCheckedModeBanner: AppEnvironments.debugBannerBoolean,
-      initialRoute: RouteNames.homeRoute,
+      initialRoute: RouteNames.splashRoute,
       onGenerateRoute: RouteManager.getRoute,
       title: AppEnvironments.appName,
       navigatorKey: navigatorKey,
