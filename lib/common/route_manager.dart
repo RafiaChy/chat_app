@@ -16,7 +16,7 @@ class RouteManager {
 
     switch (routeSettings.name) {
       case RouteNames.splashRoute:
-        return MaterialPageRoute(builder: (_) =>  const SplashView());
+        return MaterialPageRoute(builder: (_) =>   SplashView());
       case RouteNames.homeRoute:
         return MaterialPageRoute(builder: (_) => const HomeView());
 
