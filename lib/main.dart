@@ -1,11 +1,17 @@
 import 'package:chat_app/common/route_manager.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'app_configurations/app_environments.dart';
 import 'common/size_manager.dart';
 
-void  mainDelegateForEnvironments() {
+Future<void>  mainDelegateForEnvironments() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp( RootApp());
 }
 

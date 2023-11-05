@@ -20,7 +20,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     emit(SplashLoaded());
     await Future.delayed(const Duration(seconds: 3), (){
       emit(SplashExit());
-      Navigator.pushNamedAndRemoveUntil(event.context, RouteNames.homeRoute, (route) => false,);
+      Navigator.pushNamedAndRemoveUntil(event.context, RouteNames.loginRoute, (route) => false,);
     });
   }
 }

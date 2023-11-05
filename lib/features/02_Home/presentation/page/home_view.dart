@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 
 
 import '../../../../common/string_manager.dart';
+import '../../data/chat_user.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  const HomeView({super.key, required this.user});
+  final ChatUser user;
 
   @override
   Widget build(BuildContext context) {

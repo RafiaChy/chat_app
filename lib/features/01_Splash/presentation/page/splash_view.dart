@@ -27,7 +27,6 @@ class SplashView extends StatelessWidget {
             child: Image.asset(AssetsManager.splashImage,             height: SizeManager.h(context) * 0.3,
               width: SizeManager.w(context) * 0.9,),
           ),
-
           Text(StringManager.appTitle, style: GoogleFonts.robotoSlab(color: Colors.deepPurple.shade900, fontSize: SizeManager.h(context) * 0.04,fontWeight: FontWeight.bold),)
         ],
       ),
