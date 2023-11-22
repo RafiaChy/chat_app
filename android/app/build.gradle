@@ -63,20 +63,20 @@ android {
             signingConfig signingConfigs.debug
         }
     }
-    flavorDimensions "Chat App"
-    productFlavors {
-        dev {
-            dimension "Chat App"
-            applicationId "com.example.chat_app.dev"
-            resValue "string", "app_name", "Chat App"
-            versionNameSuffix ".dev"
-        }
-        prod {
-            dimension "Chat App"
-            applicationId "com.example.chat_app"
-            resValue "string", "app_name", "Chat App"
-        }
-    }
+//    flavorDimensions "Chat App"
+//    productFlavors {
+//        dev {
+//            dimension "Chat App"
+//            applicationId "com.example.chat_app.dev"
+//            resValue "string", "app_name", "Chat App"
+//            versionNameSuffix ".dev"
+//        }
+//        prod {
+//            dimension "Chat App"
+//            applicationId "com.example.chat_app"
+//            resValue "string", "app_name", "Chat App"
+//        }
+//    }
 }
 
 flutter {

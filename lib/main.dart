@@ -1,55 +1,60 @@
-import 'package:chat_app/common/route_manager.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'dart:developer';
+
+import 'package:chat_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_notification_channel/flutter_notification_channel.dart';
+import 'package:flutter_notification_channel/notification_importance.dart';
 
-import 'app_configurations/app_environments.dart';
-import 'common/size_manager.dart';
 
-Future<void>  mainDelegateForEnvironments() async {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+//global object for accessing device screen size
+late Size mq;
+
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
+  //enter full-screen
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp( RootApp());
+
+  //for setting orientation to portrait only
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+      .then((value) async {
+
+    await Firebase.initializeApp();
+
+    var result = await FlutterNotificationChannel.registerNotificationChannel(
+        description: 'For Showing Message Notification',
+        id: 'chats',
+        importance: NotificationImportance.IMPORTANCE_HIGH,
+        name: 'Chats');
+    log('\nNotification Channel Result: $result');
+    runApp(const MyApp());
+  });
 }
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-class RootApp extends StatefulWidget {
-  const RootApp._internal();
-
-  static const RootApp instance = RootApp._internal();
-
-  factory RootApp() => instance;
-
-  @override
-  State<RootApp> createState() => _RootAppState();
-}
-
-class _RootAppState extends State<RootApp> {
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.white,
+
+        title: 'Chat App',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            appBarTheme: const AppBarTheme(
           centerTitle: true,
           elevation: 1,
-           iconTheme:  IconThemeData(color:Colors.purple.shade300,),
-          titleTextStyle:GoogleFonts.robotoSlab(color: Colors.purple.shade300, fontWeight: FontWeight.bold, fontSize: SizeManager.h(context) * 0.024)
-        ),
-
-      ),
-      debugShowCheckedModeBanner: AppEnvironments.debugBannerBoolean,
-      initialRoute: RouteNames.splashRoute,
-      onGenerateRoute: RouteManager.getRoute,
-      title: AppEnvironments.appName,
-      navigatorKey: navigatorKey,
-
-
-    );
+          iconTheme: IconThemeData(color: Colors.black),
+          titleTextStyle: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.normal, fontSize: 19),
+          backgroundColor: Colors.white,
+        )),
+        home: const SplashScreen());
   }
 }
+

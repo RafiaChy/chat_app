@@ -1,10 +1,10 @@
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
-import '../../data/chat_user.dart';
-
+import '../../main.dart';
+import '../../models/chat_user.dart';
+import '../../screens/view_profile_screen.dart';
 
 class ProfileDialog extends StatelessWidget {
   const ProfileDialog({super.key, required this.user});
@@ -13,7 +13,6 @@ class ProfileDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var mq = MediaQuery.of(context).size;
     return AlertDialog(
       contentPadding: EdgeInsets.zero,
       backgroundColor: Colors.white.withOpacity(.9),
@@ -34,7 +33,7 @@ class ProfileDialog extends StatelessWidget {
                     fit: BoxFit.cover,
                     imageUrl: user.image,
                     errorWidget: (context, url, error) =>
-                    const CircleAvatar(child: Icon(CupertinoIcons.person)),
+                        const CircleAvatar(child: Icon(CupertinoIcons.person)),
                   ),
                 ),
               ),
@@ -59,10 +58,10 @@ class ProfileDialog extends StatelessWidget {
                       Navigator.pop(context);
 
                       //move to view profile screen
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (_) => ViewProfileScreen(user: user)));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => ViewProfileScreen(user: user)));
                     },
                     minWidth: 0,
                     padding: const EdgeInsets.all(0),
